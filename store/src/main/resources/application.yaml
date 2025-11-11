@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: store
-  datasource:
-    url: jdbc:postgres://localhost5433/store_api?createDatabaseIfNotExist=True
-    username: postgres
-    password: matheus19dev
-  jpa:
-    show-sql: true

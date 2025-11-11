@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: store
+  datasource:
+    url: jdbc:postgresql://localhost:5433/store_api
+    username: postgres
+    password: matheus19dev
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none # I'm going to use Flyway for schema creation
