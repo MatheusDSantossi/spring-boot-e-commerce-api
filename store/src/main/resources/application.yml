@@ -6,7 +6,11 @@ spring:
     username: postgres
     password: matheus19dev
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none # I'm going to use Flyway for schema creation
+      ddl-auto: update # I'm going to use Flyway for schema creation
