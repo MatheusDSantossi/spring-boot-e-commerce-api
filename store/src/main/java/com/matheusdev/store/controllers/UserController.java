@@ -2,6 +2,7 @@ package com.matheusdev.store.controllers;
 
 import com.matheusdev.store.dtos.UserDto;
 import com.matheusdev.store.enteties.User;
+import com.matheusdev.store.mappers.UserMapper;
 import com.matheusdev.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
@@ -18,13 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @GetMapping
     //    method: GET, POST, PUT DELETE
 //    We're focusing in GET HERE
 //    public Iterable<User> getAllUsers() {
     public Iterable<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(user -> new UserDto(user.getId(), user.getUsername(), user.getEmail())).toList();
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+//        return userRepository.findAll().stream().map(user -> new UserDto(user.getId(), user.getUsername(), user.getEmail())).toList();
     }
 
     @GetMapping("/{id}")
@@ -35,7 +41,7 @@ public class UserController {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return ResponseEntity.notFound().build();
         }
-        var userDto = new UserDto(user.getId(), user.getUsername(), user.getEmail());
-        return ResponseEntity.ok(userDto);
+//        var userDto = new UserDto(user.getId(), user.getUsername(), user.getEmail());
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 }

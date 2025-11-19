@@ -1,10 +1,13 @@
 package com.matheusdev.store.dtos;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public class UserDto {
     private Long id;
     private String username;
