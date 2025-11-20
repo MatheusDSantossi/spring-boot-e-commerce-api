@@ -5,13 +5,16 @@ import com.matheusdev.store.enteties.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
-@Primary
+//@Primary
 public class UserMapperManual implements UserMapper{
     @Override
     public UserDto toDto(User user) {
         if (user == null) return null;
 
         return new UserDto(user.getId(), user.getUsername(), user.getEmail());
+//        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), LocalDateTime.now());
     }
 }

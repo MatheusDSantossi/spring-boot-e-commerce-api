@@ -1,18 +1,14 @@
 package com.matheusdev.store.controllers;
 
 import com.matheusdev.store.dtos.UserDto;
-import com.matheusdev.store.enteties.User;
 import com.matheusdev.store.mappers.UserMapper;
 import com.matheusdev.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -25,8 +21,12 @@ public class UserController {
     //    method: GET, POST, PUT DELETE
 //    We're focusing in GET HERE
 //    public Iterable<User> getAllUsers() {
-    public Iterable<UserDto> getAllUsers() {
-        return userRepository.findAll()
+    public Iterable<UserDto> getAllUsers(@RequestParam(required = false, defaultValue = "", name = "sort") String sort) {
+
+        if (!Set.of("username", "email").contains(sort))
+            sort = "username";
+
+        return userRepository.findAll(Sort.by(sort))
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
