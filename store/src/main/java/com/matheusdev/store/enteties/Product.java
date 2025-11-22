@@ -24,7 +24,7 @@ public class Product {
     private Integer stock;
 
 //    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Byte category;
+    @Column(name = "category_id")
+    private Byte categoryId;
 
 }

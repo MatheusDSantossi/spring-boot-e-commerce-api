@@ -1,5 +1,6 @@
 package com.matheusdev.store.mappers;
 
+import com.matheusdev.store.dtos.RegisterUserRequest;
 import com.matheusdev.store.dtos.UserDto;
 import com.matheusdev.store.enteties.User;
 import org.springframework.context.annotation.Primary;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-//@Primary
+@Primary
 public class UserMapperManual implements UserMapper{
     @Override
     public UserDto toDto(User user) {
@@ -16,5 +17,11 @@ public class UserMapperManual implements UserMapper{
 
         return new UserDto(user.getId(), user.getUsername(), user.getEmail());
 //        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), LocalDateTime.now());
+    }
+
+    public User toEntity(RegisterUserRequest request) {
+        if (request == null) return null;
+
+        return new User(request.getId(), request.getName(), request.getEmail(), request.getPassword());
     }
 }
