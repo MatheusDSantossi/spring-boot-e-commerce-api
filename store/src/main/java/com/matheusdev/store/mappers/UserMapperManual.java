@@ -1,6 +1,7 @@
 package com.matheusdev.store.mappers;
 
 import com.matheusdev.store.dtos.RegisterUserRequest;
+import com.matheusdev.store.dtos.UpdateUserRequest;
 import com.matheusdev.store.dtos.UserDto;
 import com.matheusdev.store.enteties.User;
 import org.springframework.context.annotation.Primary;
@@ -23,5 +24,15 @@ public class UserMapperManual implements UserMapper{
         if (request == null) return null;
 
         return new User(request.getId(), request.getName(), request.getEmail(), request.getPassword());
+    }
+
+    @Override
+    public void update(UpdateUserRequest request, User user) {
+        if(request != null && user != null) {
+            user.setEmail(request.getEmail());
+            user.setUsername(request.getName());
+        }
+
+
     }
 }
