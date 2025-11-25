@@ -1,4 +1,7 @@
 package com.matheusdev.store.repositories;
 
-public interface CategoryRepository {
+import com.matheusdev.store.enteties.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }

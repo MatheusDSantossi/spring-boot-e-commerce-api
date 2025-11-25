@@ -1,16 +1,21 @@
 package com.matheusdev.store.enteties;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -25,6 +30,6 @@ public class Product {
 
 //    @ManyToOne
     @Column(name = "category_id")
-    private Byte categoryId;
+    private Long categoryId;
 
 }
