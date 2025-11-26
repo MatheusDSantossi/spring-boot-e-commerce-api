@@ -40,6 +40,10 @@ public class ProductController {
             @RequestBody ProductDto productDto,
             UriComponentsBuilder uriBuilder
     ) {
+        if (productDto.getCategoryId() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
         var category = categoryRepository.findById(productDto.getCategoryId()).orElse(null);
 
         if (category == null) return ResponseEntity.badRequest().build();
@@ -59,6 +63,10 @@ public class ProductController {
             @PathVariable(name = "id") Long id,
             @RequestBody ProductDto productDto
     ) {
+        if (productDto.getCategoryId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         var category = categoryRepository.findById(productDto.getCategoryId()).orElse(null);
 
         if (category == null) return ResponseEntity.badRequest().build();
@@ -68,8 +76,9 @@ public class ProductController {
         if (product == null) return ResponseEntity.notFound().build();
 
         productMapper.update(productDto, product);
-        productDto.setCategoryId(product.getCategoryId());
         productRepository.save(product);
+
+        productDto.setCategoryId(product.getCategoryId());
         productDto.setId(product.getId());
 
         return ResponseEntity.ok(productDto);
